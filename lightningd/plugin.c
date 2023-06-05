@@ -1703,11 +1703,9 @@ char *add_plugin_dir(struct plugins *plugins, const char *dir, bool error_ok)
 		} else {
 			p = plugin_register(plugins, fullpath, NULL, false,
 					    NULL, NULL);
-			if (!p && !error_ok) {
-				closedir(d);
+			if (!p && !error_ok)
 				return tal_fmt(NULL, "Failed to register %s: %s",
 				               fullpath, strerror(errno));
-			}
 		}
 	}
 	closedir(d);
